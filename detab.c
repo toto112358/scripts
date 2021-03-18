@@ -1,4 +1,3 @@
-#!/usr/bin/tcc -run
 #include <stdio.h>
 
 #define TABSTOP	8
@@ -6,8 +5,7 @@
 
 main()
 {
-	register int spacenum;
-	register char c;
+	char c, spacenum;
 
 	spacenum = TABSTOP;
 	while ((c = getchar()) != EOF) {
