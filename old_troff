@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+echo """PATH=\$DWBHOME/bin:\$PATH; export PATH"""
