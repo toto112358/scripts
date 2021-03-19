@@ -8,17 +8,27 @@
 int getline(char line[], int lim);
 int lastnonblank(char [], int len);
 
+/* folds long input lines into two or more shorter lines after the
+   last nonblank character that occurs before the MAXLINE-th column
+   of input. */
 main()
 {
 	char line[MAXLINE];
-	char len;
+	char len, nonblank, i;
 
 	while ((len = getline(line, MAXLINE)) > 0) {
-		printf("%d\n", lastnonblank(line, len));
+		nonblank = lastnonblank(line, len);
+		if (nonblank == MAXLINE || nonblank == -1)
+			printf("%s", line);
+		for (i = 0; i <= nonblank; ++i)
+			putchar(line[i]);
+		putchar('\n');
+
 	}
 	return 0;
 }
 
+/* reads line from the stdin with lim max chars */
 getline(char s[], int lim)
 {
 	char c;
@@ -35,6 +45,7 @@ getline(char s[], int lim)
 	return i;
 }
 
+/* returns the idx of the last non blank char, if none returns -1 */
 lastnonblank(char s[], int i)
 {
 	char c;
@@ -44,5 +55,5 @@ lastnonblank(char s[], int i)
 		if (c != ' ' & c != '\n' & c != '\t' & c != '\0')
 			return i;
 	}
-	return 0;
+	return -1;
 }
