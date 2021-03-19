@@ -5,7 +5,7 @@
 
 main()
 {
-	char c, spacenum;
+	register char c, spacenum;
 
 	spacenum = TABSTOP;
 	while ((c = getchar()) != EOF) {

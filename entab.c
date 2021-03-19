@@ -6,8 +6,8 @@
 main()
 {
 	register char c;
-	register int cur;		/* current tabstop length */
-	register int bc;		/* blank space count */
+	register char cur;		/* current tabstop length */
+	register short bc;		/* blank space count */
 
 	bc = 0;
 	cur = 8;
