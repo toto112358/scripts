@@ -1,37 +1,48 @@
 #include <stdio.h>
 
+#define MAXLINE 70	/* max output line length */
 #define IN	1	/* inside a word */
 #define OUT	0	/* outside a word */
-#define MAXTAB	8	/* maximum tabstop length */
-#define MAXWORD	1000	/* maximum input word length */
-#define MAXLINE	70	/* maximum output line length */
+
+
+int getline(char line[], int lim);
+int lastnonblank(char [], int len);
 
 main()
 {
-	char state, tabstop, word[MAXWORD];
-	short pos, len;	/* len is current word length */
+	char line[MAXLINE];
+	char len;
 
-	state = OUT;
-	tabstop = MAXTAB;
-	pos = 0;
-	while ((c = getchar()) != EOF) {
-		++pos;
-		if (c == '\n') {
-			pos = 0;
-			state = OUT;
-			tabstop = MAXTAB;
-			continue;
-		if (c == ' ' || c == '\t')
-			state = OUT;
-		else if (state == OUT)
-			state = IN;
-		/* keep at end of func */
-		if (c == '\t') {
-			pos += tabstop;
-			tabstop = MAXTAB;
-		} else if (--tabstop == 0)
-			tabstop = MAXTAB;
-
+	while ((len = getline(line, MAXLINE)) > 0) {
+		printf("%d\n", lastnonblank(line, len));
 	}
+	return 0;
+}
 
+getline(char s[], int lim)
+{
+	char c;
+	int i;
+
+	for (i = 0; (c=getchar()) != EOF & c != '\n' & i < lim-1; ++i)
+		s[i] = c;
+	if (i >= lim-1)
+		s[i++] = c;
+	else if (c == '\n')
+		s[i++] = c;
+	s[i] = '\0';
+
+	return i;
+}
+
+lastnonblank(char s[], int i)
+{
+	char c;
+
+	for (; i >= 0; --i) {
+		c = s[i];
+		if (c != ' ' & c != '\n' & c != '\t' & c != '\0')
+			return i;
+	}
+	return 0;
 }
