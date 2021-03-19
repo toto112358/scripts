@@ -29,7 +29,7 @@ main()
 	return 0;
 }
 
-/* reads line from the stdin with lim max chars */
+/* reads line from the stdin with lim max pos */
 getline(char s[], int lim)
 {
 	char c, tabstop;
