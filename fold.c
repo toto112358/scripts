@@ -15,7 +15,8 @@ int lastnonblank(char [], int len);
 main()
 {
 	char line[MAXLINE];
-	char len, nonblank, i;
+	char nonblank, i;
+	int len;
 
 	while ((len = getline(line, MAXLINE)) > 0) {
 		nonblank = lastnonblank(line, len);
