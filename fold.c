@@ -3,6 +3,7 @@
 #define MAXLINE 70	/* max output line length */
 #define IN	1	/* inside a word */
 #define OUT	0	/* outside a word */
+#define MAXTAB	8	/* max tab size */
 
 
 int getline(char line[], int lim);
@@ -31,11 +32,18 @@ main()
 /* reads line from the stdin with lim max chars */
 getline(char s[], int lim)
 {
-	char c;
+	char c, tabstop;
 	int i;
 
-	for (i = 0; (c=getchar()) != EOF & c != '\n' & i < lim-1; ++i)
+	tabstop = MAXTAB;
+	for (i = 0; (c=getchar()) != EOF & c != '\n' & i < lim-1; ++i) {
+		if (c == '\t') {
+			lim -= tabstop;
+			tabstop = MAXTAB;
+		} else if (--tabstop == 0)
+			tabstop = MAXTAB;
 		s[i] = c;
+	}
 	if (i >= lim-1)
 		s[i++] = c;
 	else if (c == '\n')
