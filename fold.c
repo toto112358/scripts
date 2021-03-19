@@ -20,7 +20,7 @@ main()
 		nonblank = lastnonblank(line, len);
 		if (nonblank == MAXLINE || nonblank == -1)
 			printf("%s", line);
-		for (i = 0; i <= nonblank; ++i)
+		else for (i = 0; i <= nonblank; ++i)
 			putchar(line[i]);
 		putchar('\n');
 
