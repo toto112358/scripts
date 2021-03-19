@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAXLINE 69	/* max output line length */
+#define MAXLINE 70	/* max output line length */
 #define IN	1	/* inside a word */
 #define OUT	0	/* outside a word */
 #define MAXTAB	8	/* max tab size */
@@ -15,15 +15,14 @@ int lastnonblank(char [], int len);
 main()
 {
 	char line[MAXLINE];
-	char nonblank, i;
-	int len;
+	char i;
+	int len, nonblank;
 
 	while ((len = getline(line, MAXLINE)) > 0) {
 		nonblank = lastnonblank(line, len);
-		if (nonblank == MAXLINE || nonblank == -1)
-			printf("%s", line);
-		else for (i = 0; i <= nonblank; ++i)
-			putchar(line[i]);
+
+		line[nonblank + 1] = '\0';
+		printf("%s", line);
 		putchar('\n');
 
 	}
