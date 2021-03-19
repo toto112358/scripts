@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#define MAXLINE 70	/* max output line length */
+#define MAXLINE 69	/* max output line length */
 #define IN	1	/* inside a word */
 #define OUT	0	/* outside a word */
 #define MAXTAB	8	/* max tab size */
@@ -36,7 +36,7 @@ getline(char s[], int lim)
 	int i;
 
 	tabstop = MAXTAB;
-	for (i = 0; (c=getchar()) != EOF & c != '\n' & i < lim-1; ++i) {
+	for (i = 0; (c=getchar()) != EOF && c != '\n' && i < lim-1; ++i) {
 		if (c == '\t') {
 			lim -= tabstop;
 			tabstop = MAXTAB;
@@ -60,7 +60,7 @@ lastnonblank(char s[], int i)
 
 	for (; i >= 0; --i) {
 		c = s[i];
-		if (c != ' ' & c != '\n' & c != '\t' & c != '\0')
+		if (c != ' ' && c != '\n' && c != '\t' && c != '\0')
 			return i;
 	}
 	return -1;
